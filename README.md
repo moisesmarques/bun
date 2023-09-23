@@ -13,3 +13,17 @@ curl --location 'localhost:8085/insert-tasks' \
 
 ### get tasks
 curl --location 'localhost:8085/get-tasks'
+
+## CLI commands
+
+### Install
+
+RUN> `npm install -g .`
+
+### insert tasks
+RUN> `insert-tasks <tasks>`
+Ex. 1: insert tasks "[{'description': 'foo', 'responsable': 'john.doe', 'status': 'todo'}]"
+Ex. 2: insert tasks "./data/sample-insert-tasks.json"
+
+### get tasks
+RUN> `get-tasks`

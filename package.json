@@ -25,5 +25,9 @@
     "express-fileupload": "^1.4.0",
     "nodemon": "^3.0.1",
     "path": "^0.12.7"
+  },
+  "bin": {
+    "insert-tasks": "./cli/invokeUserServiceInsertTasks.js",
+    "get-tasks": "./cli/invokeUserServiceGetTasks.js"
   }
 }

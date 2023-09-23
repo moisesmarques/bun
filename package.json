@@ -1,0 +1,29 @@
+{
+  "name": "bun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon api/server.js",
+    "test": "NODE_ENV=test nodemon --config nodemon.test.json --exec 'jest --runInBand'",
+    "test:watch": "NODE_ENV=test nodemon --config nodemon.test.json --exec 'jest --watchAll --runInBand'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moisesmarques/bun.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moisesmarques/bun/issues"
+  },
+  "homepage": "https://github.com/moisesmarques/bun#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "nodemon": "^3.0.1",
+    "path": "^0.12.7"
+  }
+}

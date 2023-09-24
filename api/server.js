@@ -1,6 +1,9 @@
 const app = require('./app');
-const connectDatabase = require('./config/database');
+const database = require('./config/database');
 const PORT = process.env.PORT || 8085;
+
+// initialize the database
+database.init()
 
 // UncaughtException Error
 process.on('uncaughtException', (err) => {

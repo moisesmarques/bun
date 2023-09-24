@@ -1,21 +1,18 @@
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
-const ErrorHandler = require('../utils/errorHandler');
 const { insertTasks, getTasks } = require('../services/userService');
+const errorMessages = require('../utils/errorMessages')
 
-// test
 exports.insertTasks = asyncErrorHandler(async (req, res, next) => {
     const tasks = req.body;
-
-    try {
-        const result = insertTasks(tasks);
-        res.status(200).json(result);
-    } catch (error) {
-        return next(new ErrorHandler("Internal server error.", 500));
+    const { error } = await insertTasks(tasks);
+    if(error){
+        res.status(errorMessages.BAD_REQUEST_CODE).json(error);
+    } else {
+        res.status(200).json();
     }
 });
 
-
 exports.getTasks = asyncErrorHandler(async (req, res, next) => {
-    const tasks = getTasks();
+    const { tasks } = await getTasks();
     res.status(200).json(tasks);
 });

@@ -1,27 +1,24 @@
-exports.insertTasks = (tasks) => {
+const { insertTasksSchema } = require('../validation/userServiceValidation');
+const database = require('../config/database');
+const { nanoid } = require('nanoid');
 
-    return tasks;
+exports.insertTasks = async (tasks) => {
+    const result = insertTasksSchema.validate(tasks);
+    if(result.error){
+        return result;
+    }
+
+    const col = database.getDb().collection('tasks');
+    return await Promise.all(tasks.map( task => {
+        const docRef = col.doc(nanoid());
+        return docRef.set(task);
+    }));
 }
 
-exports.getTasks = () => {
-
-    const tasks = [
-        {
-            "description":"Criar Login",
-            "responsable":"bruno",
-            "status":"done"
-        }, 
-        {
-            "description":"Criar Menu",
-            "responsable":"bruno",
-            "status":"doing"
-        }, 
-        {
-            "description":"Criar tela de perfil",
-            "responsable":"bruno",
-            "status":"todo"
-        }
-    ]
-
-    return tasks;
+exports.getTasks = async () => {
+    const col = database.getDb().collection('tasks');
+    const result = await col.get();
+    let tasks = [];
+    result.forEach( task => tasks.push({id: task.id, ...task.data()}));
+    return { tasks };
 }
